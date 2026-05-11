@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Visión Real Viviendas — Construcción modular en Wood Framing. Modelos desde 15m². Obra Gris, contado y financiado.">
+<title>Visión Real Viviendas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1B1F6B;
+  --purple:#534AB7;
+  --gold:#C9A84C;
+  --gold-light:#e8c46a;
+  --white:#ffffff;
+  --off-white:#f8f8fc;
+  --text:#1a1a2e;
+  --text-light:#6b7280;
+  --card-bg:#ffffff;
+  --radius:12px;
+  --shadow:0 4px 24px rgba(27,31,107,.13);
+  --shadow-hover:0 12px 40px rgba(27,31,107,.22);
+  --transition:.35s cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:#fff;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+
+/* ── Typography ── */
+h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.2}
+.section-label{font-size:.75rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem}
+.section-title{font-size:clamp(1.9rem,4vw,2.8rem);font-weight:700;line-height:1.15;margin-bottom:1rem}
+.section-sub{font-size:1.05rem;color:var(--text-light);max-width:560px;line-height:1.7}
+
+/* ── Animations ── */
+.fade-up{opacity:0;transform:translateY(36px);transition:opacity .65s var(--transition),transform .65s var(--transition)}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+.fade-left{opacity:0;transform:translateX(-40px);transition:opacity .65s var(--transition),transform .65s var(--transition)}
+.fade-left.visible{opacity:1;transform:translateX(0)}
+.fade-right{opacity:0;transform:translateX(40px);transition:opacity .65s var(--transition),transform .65s var(--transition)}
+.fade-right.visible{opacity:1;transform:translateX(0)}
+[data-delay="1"]{transition-delay:.1s}
+[data-delay="2"]{transition-delay:.2s}
+[data-delay="3"]{transition-delay:.3s}
+[data-delay="4"]{transition-delay:.4s}
+[data-delay="5"]{transition-delay:.5s}
+[data-delay="6"]{transition-delay:.6s}
+
+/* ── Navbar ── */
+#navbar{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.85rem 4%;
+  background:rgba(27,31,107,.0);
+  transition:background .4s,box-shadow .4s,padding .4s;
+}
+#navbar.scrolled{
+  background:rgba(27,31,107,.97);
+  box-shadow:0 2px 20px rgba(0,0,0,.25);
+  padding:.6rem 4%;
+}
+.nav-logo img{height:52px;width:auto;filter:brightness(0) invert(1)}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{font-size:.93rem;font-weight:500;color:#fff;opacity:.88;transition:opacity .25s,color .25s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:2px;background:var(--gold);transition:width .3s}
+.nav-links a:hover{opacity:1}
+.nav-links a:hover::after{width:100%}
+.nav-cta{
+  background:var(--gold);color:var(--navy)!important;opacity:1!important;
+  padding:.5rem 1.25rem;border-radius:50px;font-weight:600;font-size:.88rem;
+  transition:background var(--transition),transform var(--transition)!important;
+}
+.nav-cta::after{display:none!important}
+.nav-cta:hover{background:var(--gold-light);transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:5px;padding:4px;cursor:pointer}
+.hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:transform .3s,opacity .3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ── Hero ── */
+#hero{
+  position:relative;min-height:100vh;display:flex;align-items:center;
+  background:#111 center/cover no-repeat;
+}
+#hero-bg{
+  position:absolute;inset:0;background:center/cover no-repeat;
+  transition:transform .1s linear;
+}
+.hero-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(135deg,rgba(27,31,107,.82) 0%,rgba(83,74,183,.45) 60%,rgba(0,0,0,.5) 100%);
+}
+#particles-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
+.hero-content{
+  position:relative;z-index:3;padding:0 6%;
+  max-width:750px;
+  margin-top:80px;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(201,168,76,.18);border:1px solid rgba(201,168,76,.4);
+  color:var(--gold-light);font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  padding:.4rem .9rem;border-radius:50px;margin-bottom:1.5rem;
+}
+.hero-badge svg{width:14px;height:14px}
+@keyframes heroGlow{
+  0%,100%{text-shadow:0 0 20px rgba(201,168,76,.3),0 0 40px rgba(201,168,76,.15)}
+  50%{text-shadow:0 0 30px rgba(201,168,76,.55),0 0 60px rgba(201,168,76,.25),0 0 80px rgba(201,168,76,.1)}
+}
+.hero-title{
+  font-size:clamp(2.4rem,6vw,4.2rem);font-weight:900;color:#fff;
+  line-height:1.08;margin-bottom:1.2rem;
+  animation:heroGlow 3s ease-in-out infinite;
+}
+.hero-title em{color:var(--gold);font-style:italic}
+.hero-sub{
+  font-size:clamp(1rem,2vw,1.2rem);color:rgba(255,255,255,.82);
+  line-height:1.7;margin-bottom:2.2rem;max-width:520px;font-weight:300;
+}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{
+  background:var(--gold);color:var(--navy);font-weight:700;font-size:.95rem;
+  padding:.85rem 2.2rem;border-radius:50px;
+  transition:background var(--transition),transform var(--transition),box-shadow var(--transition);
+  box-shadow:0 4px 18px rgba(201,168,76,.35);
+}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,168,76,.45)}
+.btn-outline{
+  border:2px solid rgba(255,255,255,.7);color:#fff;font-weight:600;font-size:.95rem;
+  padding:.83rem 2.1rem;border-radius:50px;
+  transition:border-color var(--transition),background var(--transition),transform var(--transition);
+}
+.btn-outline:hover{border-color:#fff;background:rgba(255,255,255,.1);transform:translateY(-2px)}
+.hero-scroll{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:.4rem;color:rgba(255,255,255,.6);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
+  z-index:3;
+}
+.hero-scroll svg{animation:bounce 2s infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+/* ── Stats ── */
+#stats{background:var(--navy);padding:4rem 6%}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;text-align:center}
+.stat-item{padding:1.5rem 1rem}
+.stat-num{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4vw,3rem);font-weight:700;color:var(--gold);line-height:1}
+.stat-num.stat-text{font-size:clamp(1.1rem,2vw,1.5rem);line-height:1.25}
+.stat-suffix{font-size:1.4rem;color:var(--gold)}
+.stat-label{font-size:.85rem;color:rgba(255,255,255,.65);margin-top:.4rem;letter-spacing:.04em}
+
+/* ── Services ── */
+#servicios{padding:6rem 6%;background:var(--off-white)}
+.services-header{text-align:center;margin-bottom:3.5rem}
+.services-header .section-sub{margin:0 auto}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.service-card{
+  background:#fff;border-radius:var(--radius);padding:2.5rem 2rem;
+  box-shadow:var(--shadow);
+  transition:transform var(--transition),box-shadow var(--transition);
+  border-top:3px solid transparent;
+}
+.service-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-hover);border-top-color:var(--gold)}
+.service-icon{
+  width:56px;height:56px;border-radius:14px;
+  background:linear-gradient(135deg,var(--navy),var(--purple));
+  display:flex;align-items:center;justify-content:center;margin-bottom:1.4rem;
+}
+.service-icon svg{width:28px;height:28px;color:#fff}
+.service-card h3{font-size:1.2rem;margin-bottom:.75rem;color:var(--navy)}
+.service-card p{font-size:.93rem;color:var(--text-light);line-height:1.7}
+
+/* ── Nosotros ── */
+#nosotros{padding:6rem 6%;background:#fff}
+.nosotros-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.nosotros-img{position:relative;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-hover)}
+.nosotros-img img{width:100%;height:520px;object-fit:cover}
+.nosotros-img-badge{
+  position:absolute;bottom:1.5rem;right:1.5rem;
+  background:var(--gold);color:var(--navy);font-weight:700;font-size:.85rem;
+  padding:.6rem 1.2rem;border-radius:8px;
+}
+.nosotros-text .section-label{display:block}
+.nosotros-text h2{margin-bottom:1.2rem}
+.nosotros-text p{font-size:.97rem;color:var(--text-light);line-height:1.8;margin-bottom:1rem}
+.nosotros-features{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:1.8rem}
+.nosotros-feature{display:flex;align-items:center;gap:.6rem;font-size:.9rem;font-weight:500;color:var(--navy)}
+.nosotros-feature svg{width:18px;height:18px;color:var(--gold);flex-shrink:0}
+
+/* ── Catálogo ── */
+#catalogo{padding:6rem 6%;background:linear-gradient(160deg,#0f1248 0%,var(--navy) 60%,#1a154a 100%)}
+.catalogo-header{text-align:center;margin-bottom:3.5rem}
+.catalogo-header .section-title{color:#fff}
+.catalogo-header .section-sub{color:rgba(255,255,255,.65);margin:0 auto}
+.catalog-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(290px,1fr));
+  gap:1.5rem;
+}
+.model-card{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--radius);overflow:hidden;
+  transition:transform var(--transition),box-shadow var(--transition),border-color var(--transition);
+  cursor:pointer;
+}
+.model-card:hover{transform:translateY(-5px);box-shadow:0 16px 48px rgba(0,0,0,.4);border-color:rgba(201,168,76,.5)}
+.model-img{height:210px;overflow:hidden;position:relative}
+.model-img img{width:100%;height:100%;object-fit:cover;transition:transform .55s ease}
+.model-card:hover .model-img img{transform:scale(1.07)}
+.model-tag{
+  position:absolute;top:.75rem;left:.75rem;
+  background:rgba(201,168,76,.9);color:var(--navy);
+  font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  padding:.3rem .7rem;border-radius:50px;
+}
+.model-body{padding:1.4rem 1.4rem 1.6rem}
+.model-size{font-family:'Playfair Display',serif;font-size:1.55rem;font-weight:700;color:#fff;margin-bottom:.25rem}
+.model-name{font-size:.85rem;color:rgba(255,255,255,.55);margin-bottom:.7rem}
+.model-desc{font-size:.88rem;color:rgba(255,255,255,.7);line-height:1.6;margin-bottom:1.2rem}
+.model-actions{display:flex;gap:.6rem;flex-wrap:wrap}
+.btn-detail{
+  flex:1;background:var(--purple);color:#fff;font-size:.82rem;font-weight:600;
+  padding:.6rem .9rem;border-radius:8px;text-align:center;
+  transition:background var(--transition);
+}
+.btn-detail:hover{background:#6d64d4}
+.btn-pdf{
+  flex:1;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.5);
+  color:var(--gold-light);font-size:.82rem;font-weight:600;
+  padding:.6rem .9rem;border-radius:8px;text-align:center;
+  transition:background var(--transition),border-color var(--transition);
+  display:flex;align-items:center;justify-content:center;gap:.4rem;
+}
+.btn-pdf:hover{background:rgba(201,168,76,.28);border-color:var(--gold)}
+.btn-pdf svg{width:14px;height:14px}
+
+/* ── Galería ── */
+#galeria{padding:6rem 6%;background:var(--off-white)}
+.galeria-header{text-align:center;margin-bottom:3rem}
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:.9rem;
+}
+.gallery-item{
+  border-radius:10px;overflow:hidden;aspect-ratio:1;cursor:pointer;
+  position:relative;
+}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease,filter .4s ease}
+.gallery-item::after{
+  content:'';position:absolute;inset:0;
+  background:rgba(27,31,107,.0);transition:background .35s;
+}
+.gallery-item:hover img{transform:scale(1.08)}
+.gallery-item:hover::after{background:rgba(27,31,107,.3)}
+
+/* ── Contacto ── */
+#contacto{padding:6rem 6%;background:var(--navy)}
+.contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.contacto-info .section-title{color:#fff;margin-bottom:1.5rem}
+.contacto-info .section-sub{color:rgba(255,255,255,.65);margin-bottom:2.5rem}
+.contact-item{
+  display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;
+  padding:1rem 1.25rem;background:rgba(255,255,255,.06);border-radius:10px;
+  border:1px solid rgba(255,255,255,.08);transition:background var(--transition);
+}
+.contact-item:hover{background:rgba(255,255,255,.1)}
+.contact-icon{
+  width:44px;height:44px;border-radius:10px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.contact-icon.wa{background:#25D366}
+.contact-icon.ig{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
+.contact-icon.tt{background:#000}
+.contact-icon svg{width:22px;height:22px;color:#fff}
+.contact-item-text{flex:1}
+.contact-item-label{font-size:.75rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.2rem}
+.contact-item-value{font-size:.97rem;font-weight:500;color:#fff}
+.map-wrapper{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-hover)}
+.map-wrapper iframe{display:block;width:100%;height:400px;border:0}
+.btn-ficha{
+  display:inline-flex;align-items:center;gap:.65rem;
+  background:var(--gold);color:var(--navy);font-weight:700;font-size:.95rem;
+  padding:.9rem 2rem;border-radius:50px;margin-top:1.75rem;
+  transition:background var(--transition),transform var(--transition),box-shadow var(--transition);
+  box-shadow:0 4px 18px rgba(201,168,76,.35);
+}
+.btn-ficha:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,168,76,.5)}
+.btn-ficha svg{width:18px;height:18px;flex-shrink:0}
+
+/* ── Footer ── */
+footer{background:#0b0e38;padding:3rem 6% 2rem;border-top:1px solid rgba(255,255,255,.07)}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+.footer-logo img{height:44px;filter:brightness(0) invert(1);opacity:.8}
+.footer-links{display:flex;gap:1.5rem;flex-wrap:wrap}
+.footer-links a{font-size:.85rem;color:rgba(255,255,255,.5);transition:color .25s}
+.footer-links a:hover{color:var(--gold)}
+.footer-copy{font-size:.8rem;color:rgba(255,255,255,.3);margin-top:1.5rem;text-align:center}
+.footer-socials{display:flex;gap:.75rem}
+.footer-social{
+  width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.07);
+  display:flex;align-items:center;justify-content:center;
+  transition:background var(--transition);
+}
+.footer-social:hover{background:var(--purple)}
+.footer-social svg{width:16px;height:16px;color:rgba(255,255,255,.7)}
+
+/* ── WhatsApp Floating ── */
+#wa-float{
+  position:fixed;bottom:1.8rem;right:1.8rem;z-index:999;
+  width:58px;height:58px;border-radius:50%;
+  background:#25D366;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 24px rgba(37,211,102,.5);
+  transition:transform var(--transition),box-shadow var(--transition);
+}
+#wa-float:hover{transform:scale(1.12);box-shadow:0 10px 32px rgba(37,211,102,.7)}
+#wa-float svg{width:30px;height:30px;color:#fff}
+
+/* ── Modal ── */
+#modal-overlay{
+  position:fixed;inset:0;z-index:2000;
+  background:rgba(10,10,30,.92);backdrop-filter:blur(6px);
+  display:flex;align-items:center;justify-content:center;padding:1.5rem;
+  opacity:0;pointer-events:none;transition:opacity .35s;
+}
+#modal-overlay.open{opacity:1;pointer-events:auto}
+.modal-box{
+  background:#fff;border-radius:16px;
+  width:100%;max-width:820px;max-height:90vh;overflow:hidden;
+  display:flex;flex-direction:column;
+  transform:scale(.94);transition:transform .35s;
+}
+#modal-overlay.open .modal-box{transform:scale(1)}
+.modal-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.2rem 1.6rem;border-bottom:1px solid #eee;
+}
+.modal-title{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--navy)}
+.modal-close{
+  width:36px;height:36px;border-radius:50%;background:#f5f5f5;
+  display:flex;align-items:center;justify-content:center;
+  transition:background var(--transition);cursor:pointer;
+}
+.modal-close:hover{background:#e0e0e0}
+.modal-close svg{width:18px;height:18px}
+.modal-body{overflow-y:auto;flex:1}
+.modal-gallery{position:relative;background:#111;height:360px}
+.modal-gallery img{width:100%;height:100%;object-fit:contain;transition:opacity .3s}
+.gallery-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.15);
+  display:flex;align-items:center;justify-content:center;z-index:2;
+  transition:background var(--transition);cursor:pointer;
+}
+.gallery-arrow:hover{background:rgba(255,255,255,.35)}
+.gallery-arrow.prev{left:.8rem}
+.gallery-arrow.next{right:.8rem}
+.gallery-arrow svg{width:20px;height:20px;color:#fff}
+.gallery-dots{
+  position:absolute;bottom:.75rem;left:50%;transform:translateX(-50%);
+  display:flex;gap:.4rem;
+}
+.gallery-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.4);transition:background .25s,transform .25s;cursor:pointer}
+.gallery-dot.active{background:#fff;transform:scale(1.25)}
+.modal-info{padding:1.6rem}
+.modal-info h3{font-size:1.1rem;color:var(--navy);margin-bottom:.6rem}
+.modal-info p{font-size:.93rem;color:var(--text-light);line-height:1.7;margin-bottom:1.4rem}
+.modal-dl{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--navy);color:#fff;font-size:.9rem;font-weight:600;
+  padding:.75rem 1.8rem;border-radius:50px;
+  transition:background var(--transition);
+}
+.modal-dl:hover{background:var(--purple)}
+.modal-dl svg{width:17px;height:17px}
+
+/* ── Responsive ── */
+@media(max-width:1024px){
+  .services-grid{grid-template-columns:1fr 1fr}
+  .nosotros-grid{grid-template-columns:1fr;gap:3rem}
+  .nosotros-img img{height:380px}
+  .contacto-grid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  .nav-links{
+    position:fixed;top:70px;left:0;right:0;
+    background:rgba(27,31,107,.97);
+    flex-direction:column;gap:0;
+    padding:1rem 0 1.5rem;
+    max-height:0;overflow:hidden;
+    transition:max-height .4s;
+  }
+  .nav-links.open{max-height:400px}
+  .nav-links a{padding:.9rem 6%;width:100%;border-bottom:1px solid rgba(255,255,255,.06)}
+  .nav-links .nav-cta{margin:.75rem 6% 0;display:block;text-align:center;border-radius:8px}
+  .hamburger{display:flex}
+  .services-grid{grid-template-columns:1fr}
+  .nosotros-features{grid-template-columns:1fr}
+  .catalog-grid{grid-template-columns:1fr 1fr}
+  .footer-inner{flex-direction:column;text-align:center}
+  .footer-links{justify-content:center}
+  .hero-btns{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:520px){
+  .catalog-grid{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .modal-gallery{height:240px}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAVBAR ═══ -->
+<nav id="navbar">
+  <a class="nav-logo" href="#inicio">
+    <img id="logo-img" src="" alt="Visión Real Viviendas">
+  </a>
+  <div class="nav-links" id="nav-links">
+    <a href="#inicio">Inicio</a>
+    <a href="#nosotros">Nosotros</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#catalogo">Catálogo</a>
+    <a href="#galeria">Galería</a>
+    <a href="#contacto">Contacto</a>
+    <a href="#contacto" class="nav-cta">
+      <svg viewBox="0 0 24 24" fill="currentColor" style="display:inline;vertical-align:middle;margin-right:4px;width:14px;height:14px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2c-5.514 0-9.999 4.486-9.999 10 0 1.762.464 3.413 1.277 4.85L2 22l5.233-1.261A9.953 9.953 0 0 0 12 22c5.514 0 10-4.486 10-10S17.513 2 11.999 2z"/></svg>
+      WhatsApp
+    </a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="inicio">
+  <div id="hero" style="min-height:100vh">
+    <div id="hero-bg"></div>
+    <video autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0">
+      <source src="Video portada/video portada.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <canvas id="particles-canvas"></canvas>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Wood Framing
+      </div>
+      <h1 class="hero-title">Tu Vivienda Ideal,<br><em>Hecha Realidad</em></h1>
+      <p class="hero-sub">Construimos viviendas modulares de alta calidad en Wood Framing. Desde 15m², entrega Obra Gris en todo el país.</p>
+      <div class="hero-btns">
+        <a href="#catalogo" class="btn-primary">Ver Catálogo</a>
+        <a href="#contacto" class="btn-outline">Consultar Ahora</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><polyline points="6 9 12 15 18 9"/></svg>
+      scroll
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STATS ═══ -->
+<section id="stats">
+  <div class="stats-grid">
+    <div class="stat-item fade-up" data-delay="1">
+      <div class="stat-num stat-text">Modelos</div>
+      <div class="stat-label">Disponibles</div>
+    </div>
+    <div class="stat-item fade-up" data-delay="2">
+      <div class="stat-num stat-text">Contado</div>
+      <div class="stat-label">y Financiado</div>
+    </div>
+    <div class="stat-item fade-up" data-delay="3">
+      <div class="stat-num stat-text">Obra</div>
+      <div class="stat-label">Gris</div>
+    </div>
+    <div class="stat-item fade-up" data-delay="4">
+      <div class="stat-num stat-text">Wood</div>
+      <div class="stat-label">Framing</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SERVICIOS ═══ -->
+<section id="servicios">
+  <div class="services-header">
+    <p class="section-label fade-up">Lo que hacemos</p>
+    <h2 class="section-title fade-up" data-delay="1">Nuestros Servicios</h2>
+    <p class="section-sub fade-up" data-delay="2">Ofrecemos soluciones integrales de construcción modular con la más alta tecnología y materiales premium.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card fade-up" data-delay="1">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <h3>Construcción en Wood Framing</h3>
+      <p>Sistema constructivo en Wood Framing de última generación. Más rápido, más eficiente y con mejor aislación térmica y acústica que la construcción tradicional.</p>
+    </div>
+    <div class="service-card fade-up" data-delay="2">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      </div>
+      <h3>Diseño Personalizado</h3>
+      <p>Adaptamos cada proyecto a tus necesidades y terreno. Contamos con arquitectos e ingenieros especializados para crear el espacio ideal para vos y tu familia.</p>
+    </div>
+    <div class="service-card fade-up" data-delay="3">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <h3>Obra Gris</h3>
+      <p>Nos encargamos de todo el proceso: desde el diseño y los planos hasta la construcción e instalaciones. Tu casa lista para habitar, sin preocupaciones adicionales.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ NOSOTROS ═══ -->
+<section id="nosotros">
+  <div class="nosotros-grid">
+    <div class="nosotros-text fade-left">
+      <span class="section-label">Quiénes somos</span>
+      <h2 class="section-title">Construimos Sueños <em style="font-style:italic;color:var(--purple)">con Pasión</em></h2>
+      <p>En Visión Real Viviendas somos especialistas en construcción en Wood Framing, ofreciendo soluciones habitacionales de calidad superior a precios accesibles. Construimos hogares con los sistemas más modernos del mercado.</p>
+      <p>Nuestro equipo de profesionales combina experiencia técnica con un profundo compromiso con cada cliente. Desde el primer plano hasta la entrega de llaves, estamos presentes en cada etapa del proceso.</p>
+      <div class="nosotros-features">
+        <div class="nosotros-feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Wood Framing
+        </div>
+        <div class="nosotros-feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Envío a todo el país
+        </div>
+        <div class="nosotros-feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Contado y financiado
+        </div>
+        <div class="nosotros-feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Servicio post-venta
+        </div>
+        <div class="nosotros-feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Planos y permisos
+        </div>
+        <div class="nosotros-feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Garantía total
+        </div>
+      </div>
+    </div>
+    <div class="nosotros-img fade-right">
+      <img id="about-img" src="" alt="Visión Real Viviendas - Obra terminada" loading="lazy">
+      <div class="nosotros-img-badge">Calidad Garantizada</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CATÁLOGO ═══ -->
+<section id="catalogo">
+  <div class="catalogo-header">
+    <p class="section-label fade-up">Nuestros modelos</p>
+    <h2 class="section-title fade-up" data-delay="1">Catálogo de Viviendas</h2>
+    <p class="section-sub fade-up" data-delay="2">Encontrá el modelo ideal para tu proyecto. Todos los modelos son personalizables y cuentan con ficha técnica completa.</p>
+  </div>
+  <div class="catalog-grid" id="catalog-grid"></div>
+</section>
+
+<!-- ═══ GALERÍA ═══ -->
+<section id="galeria">
+  <div class="galeria-header">
+    <p class="section-label fade-up">Obras realizadas</p>
+    <h2 class="section-title fade-up" data-delay="1">Galería de Proyectos — Obras Realizadas</h2>
+    <p class="section-sub fade-up" data-delay="2" style="margin:0 auto">Conocé algunos de nuestros modelos y proyectos en todo el país.</p>
+  </div>
+  <div class="gallery-grid" id="gallery-grid"></div>
+</section>
+
+<!-- ═══ CONTACTO ═══ -->
+<section id="contacto">
+  <div class="contacto-grid">
+    <div class="contacto-info fade-left">
+      <span class="section-label" style="display:block">Hablemos</span>
+      <h2 class="section-title">Contactate con<br><span style="color:var(--gold)">Nosotros</span></h2>
+      <p class="section-sub">¿Tenés dudas o querés iniciar tu proyecto? Estamos disponibles para ayudarte en todo momento.</p>
+      <br>
+      <a id="wa-contact" href="#" target="_blank" rel="noopener" class="contact-item" style="display:flex">
+        <div class="contact-icon wa">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2c-5.514 0-9.999 4.486-9.999 10 0 1.762.464 3.413 1.277 4.85L2 22l5.233-1.261A9.953 9.953 0 0 0 12 22c5.514 0 10-4.486 10-10S17.513 2 11.999 2z"/></svg>
+        </div>
+        <div class="contact-item-text">
+          <div class="contact-item-label">WhatsApp</div>
+          <div class="contact-item-value" id="wa-display">Envianos un mensaje</div>
+        </div>
+      </a>
+      <a id="ig-contact" href="#" target="_blank" rel="noopener" class="contact-item" style="display:flex">
+        <div class="contact-icon ig">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+        </div>
+        <div class="contact-item-text">
+          <div class="contact-item-label">Instagram</div>
+          <div class="contact-item-value" id="ig-display">@visionrealviviendas</div>
+        </div>
+      </a>
+      <a id="tt-contact" href="#" target="_blank" rel="noopener" class="contact-item" style="display:flex">
+        <div class="contact-icon tt">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.28 6.28 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.27 8.27 0 0 0 4.83 1.54V6.79a4.85 4.85 0 0 1-1.06-.1z"/></svg>
+        </div>
+        <div class="contact-item-text">
+          <div class="contact-item-label">TikTok</div>
+          <div class="contact-item-value" id="tt-display">@visionrealviviendas</div>
+        </div>
+      </a>
+      <a id="btn-ficha" href="#" download class="btn-ficha">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Descargar Ficha Técnica
+      </a>
+    </div>
+    <div class="fade-right">
+      <div class="map-wrapper">
+        <iframe
+          src="https://maps.google.com/maps?q=-34.8972875,-58.17189&t=&z=15&ie=UTF8&iwloc=&output=embed"
+          allowfullscreen loading="lazy"
+          title="Ubicación Visión Real Viviendas">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-inner">
+    <a href="#inicio" class="footer-logo"><img id="footer-logo-img" src="" alt="Visión Real Viviendas"></a>
+    <ul class="footer-links">
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#catalogo">Catálogo</a></li>
+      <li><a href="#galeria">Galería</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <div class="footer-socials">
+      <a class="footer-social" id="footer-ig" href="#" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+      </a>
+      <a class="footer-social" id="footer-tt" href="#" target="_blank" rel="noopener" aria-label="TikTok">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.28 6.28 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.27 8.27 0 0 0 4.83 1.54V6.79a4.85 4.85 0 0 1-1.06-.1z"/></svg>
+      </a>
+      <a class="footer-social" id="footer-wa" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2c-5.514 0-9.999 4.486-9.999 10 0 1.762.464 3.413 1.277 4.85L2 22l5.233-1.261A9.953 9.953 0 0 0 12 22c5.514 0 10-4.486 10-10S17.513 2 11.999 2z"/></svg>
+      </a>
+    </div>
+  </div>
+  <p class="footer-copy">© 2026 Visión Real Viviendas. Todos los derechos reservados.</p>
+</footer>
+
+<!-- ═══ WA FLOAT ═══ -->
+<a id="wa-float" href="#" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2c-5.514 0-9.999 4.486-9.999 10 0 1.762.464 3.413 1.277 4.85L2 22l5.233-1.261A9.953 9.953 0 0 0 12 22c5.514 0 10-4.486 10-10S17.513 2 11.999 2z"/></svg>
+</a>
+
+<!-- ═══ MODAL ═══ -->
+<div id="modal-overlay" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2 class="modal-title" id="modal-title">Modelo</h2>
+      <button class="modal-close" id="modal-close" aria-label="Cerrar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-gallery" id="modal-gallery">
+        <img id="modal-img" src="" alt="Imagen del modelo">
+        <button class="gallery-arrow prev" id="gal-prev" aria-label="Anterior">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="gallery-arrow next" id="gal-next" aria-label="Siguiente">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <div class="gallery-dots" id="gallery-dots"></div>
+      </div>
+      <div class="modal-info">
+        <h3 id="modal-subtitle"></h3>
+        <p id="modal-desc"></p>
+        <a id="modal-pdf" href="#" download class="modal-dl">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Descargar Catálogo PDF
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ─── CONFIG ─── */
+const WA_NUMBER = '5491160429235';
+const IG_USER   = 'visionrealviviendas';
+const TT_USER   = 'visionrealviviendas';
+const WA_MSG    = encodeURIComponent('Hola! Quiero información sobre las viviendas de Visión Real.');
+const BASE      = 'Render, plano y Catalogo';
+const FALLBACK_PDF = BASE + '/Ficha Tecnica Vision Real viviendas.pdf';
+
+/* ─── PATH ENCODER ─── */
+function enc(path) {
+  return path.split('/').map(s => encodeURIComponent(s)).join('/');
+}
+
+/* ─── MODELS DATA ─── */
+const MODELS = [
+  {
+    id:'m15', size:'15m²', name:'Modelo 15',
+    desc:'Vivienda modular compacta de 15m² en Wood Framing. Ideal como habitación adicional, uso vacacional o primera vivienda. Excelente aislación térmica y acústica.',
+    folder: BASE + '/15m2',
+    cover:'15m2.jpeg',
+    gallery:['15m2.jpeg','15m2 noche.jpeg','plano 15m2.png'],
+    pdf: BASE + '/15m2/Catalogo 15m2 .pdf',
+    tag:'Compacto'
+  },
+  {
+    id:'m18', size:'18m²', name:'Modelo Americana 18',
+    desc:'Vivienda de 18m² con diseño optimizado en Wood Framing. Terminaciones de alta calidad, lista para habitar. Perfecta para lotes pequeños o como unidad independiente.',
+    folder: BASE + '/18m',
+    cover:'9A8E93CA-B6E5-4E1C-A3D0-D0FF73671EC9.png',
+    gallery:['9A8E93CA-B6E5-4E1C-A3D0-D0FF73671EC9.png','IMG_1362.jpeg','WhatsApp Image 2026-01-29 at 8.40.55 PM.jpeg'],
+    pdf: BASE + '/18m/18m2 americana .pdf',
+    tag:'Compacto'
+  },
+  {
+    id:'m21', size:'21m²', name:'Modelo Minimalista 21',
+    desc:'Diseño minimalista de 21m² que aprovecha cada centímetro. Living comedor integrado, kitchenette y dormitorio. El balance perfecto entre funcionalidad y estética.',
+    folder: BASE + '/21m2',
+    cover:'WhatsApp Image 2026-02-02 at 4.03.20 PM (1).jpeg',
+    gallery:['WhatsApp Image 2026-02-02 at 4.03.00 PM.jpeg','WhatsApp Image 2026-02-02 at 4.03.20 PM (1).jpeg','WhatsApp Image 2026-02-02 at 4.03.20 PM.jpeg','WhatsApp Image 2026-02-02 at 4.03.21 PM.jpeg'],
+    pdf: BASE + '/21m2/21m2 minimalista .pdf',
+    tag:'Compacto'
+  },
+  {
+    id:'m25cab', size:'25m² Cabaña', name:'Cabaña Wood Frame 5570',
+    desc:'Cabaña en Wood Framing de 25m². Perfecta como alojamiento turístico o refugio de montaña. Estructura de madera tratada, aislación superior y diseño rústico-moderno.',
+    folder: BASE + '/25m2 cabaña',
+    cover:'25m2 Cabaña.jpeg',
+    gallery:['25m2 Cabaña.jpeg'],
+    pdf: BASE + '/25m2 cabaña/Cabaña Wood frame 25m2 modelo 5570.pdf',
+    tag:'Cabaña'
+  },
+  {
+    id:'m30', size:'30m²', name:'Modelo Americana 30',
+    desc:'30m² en estilo americano con ambientes definidos. Incluye living, cocina, baño completo y dormitorio. Construcción en Wood Framing con terminaciones premium.',
+    folder: BASE + '/30m2',
+    cover:'WhatsApp Image 2026-01-29 at 9.43.26 PM.jpeg',
+    gallery:['WhatsApp Image 2026-01-29 at 9.43.26 PM.jpeg','WhatsApp Image 2026-01-29 at 9.44.56 PMplano.jpeg','WhatsApp Image 2026-01-30 at 1.12.21 AM.jpeg'],
+    pdf: BASE + '/30m2/30M2 Americana.pdf',
+    tag:'Mediano'
+  },
+  {
+    id:'m33', size:'33m²', name:'Modelo 101010',
+    desc:'El modelo 33m² 101010 ofrece una distribución inteligente con living-comedor, cocina separada, baño y dormitorio. Diseño versátil adaptable a distintos terrenos.',
+    folder: BASE + '/33m2',
+    cover:'33m2.jpeg',
+    gallery:['33m2.jpeg','33m2..jpeg','plano 33m2.jpeg'],
+    pdf: BASE + '/33m2/Catalogo 33m2 modelo 101010.pdf',
+    tag:'Mediano'
+  },
+  {
+    id:'m36', size:'36m²', name:'Modelo Clásico 36',
+    desc:'36m² con distribución clásica y ambientes amplios. Living, cocina-comedor, baño completo y dormitorio principal. Excelente relación superficie/confort.',
+    folder: BASE + '/36m2',
+    cover:'36m2.png',
+    gallery:['36m2.png'],
+    pdf: BASE + '/36m2/Catalogo 36m2 .pdf',
+    tag:'Mediano'
+  },
+  {
+    id:'m40p', size:'40m² 2 Plantas', name:'Modelo Dúplex 40',
+    desc:'Innovador modelo dúplex de 40m² en dos plantas. Planta baja con living y cocina, planta alta con dormitorio y baño. Máximo aprovechamiento del lote con mínima huella.',
+    folder: BASE + '/40m2 2 Plantas',
+    cover:'ChatGPT Image 20 ene 2026, 18_19_13.png',
+    gallery:['ChatGPT Image 20 ene 2026, 18_19_13.png','WhatsApp Image 2026-01-20 at 6.21.55 PM.jpeg','WhatsApp Image 2026-01-20 at 6.27.06 PM.jpeg','WhatsApp Image 2026-02-03 at 4.49.06 PM.jpeg'],
+    pdf: BASE + '/40m2 2 Plantas/Catalogo 2 Plantas 40m2.pdf',
+    tag:'Dúplex'
+  },
+  {
+    id:'m47', size:'47m²', name:'Modelo 206100',
+    desc:'47m² con amplio living-comedor, cocina completa, dormitorio y baño. Diseño funcional en Wood Framing, perfecto para parejas o familias pequeñas.',
+    folder: BASE + '/47m2',
+    cover:'ChatGPT Image 7 may 2026, 02_32_41 p.m..png',
+    gallery:['47 TRAD (2).jpeg','47 TRAD.jpeg','ChatGPT Image 7 may 2026, 02_32_41 p.m..png','ChatGPT Image 7 may 2026, 02_35_19 p.m..png'],
+    pdf: BASE + '/47m2/Catalogo  47m2 modelo 206100.pdf',
+    tag:'Mediano'
+  },
+  {
+    id:'m51', size:'51m²', name:'Modelo 656',
+    desc:'El modelo 656 de 51m² combina diseño moderno con funcionalidad. Ambientes generosos, dormitorio, baño completo y espacios de guardado optimizados.',
+    folder: BASE + '/51m2',
+    cover:'51m2 dia.jpeg',
+    gallery:['51m2 dia.jpeg','51m2 n.jpeg'],
+    pdf: BASE + '/51m2/Catalogo 51m2 modelo 656.pdf',
+    tag:'Mediano'
+  },
+  {
+    id:'m54', size:'54m²', name:'Modelo Premium 54',
+    desc:'54m² de diseño premium con todos los ambientes. Living-comedor amplio, cocina independiente, dormitorios y baño completo. La opción más completa de la gama media.',
+    folder: BASE + '/54m2',
+    cover:'WhatsApp Image 2026-01-30 at 1.07.49 PM.jpeg',
+    gallery:['WhatsApp Image 2026-01-30 at 1.07.49 PM.jpeg','plano 54m2.jpeg','WhatsApp Image 2026-02-03 at 4.51.12 PMre.jpeg','WhatsApp Image 2026-02-03 at 4.51.13 PM.jpeg','WhatsApp Image 2026-02-03 at 4.51.13 PM3d.jpeg','WhatsApp Image 2026-02-03 at 4.51.13 PMss.jpeg'],
+    pdf: BASE + '/54m2/54m2.pdf',
+    tag:'Mediano'
+  },
+  {
+    id:'m67', size:'67,32m²', name:'Steel o Wood 67',
+    desc:'El modelo 67,32m² en Wood Framing de alto rendimiento. 3 dormitorios, 2 baños, living-comedor integrado y cocina completa. Construcción de alta performance.',
+    folder: BASE + '/67,32m2',
+    cover:'67,32m2 steel o wood.jpeg',
+    gallery:['67,32m2 steel o wood.jpeg','67,32m2 steel o wood.jpeg 3D.jpeg','67,32m2 steel o wood.jpeg plano .jpeg','67,32m2 steel o wood.jpegg.jpeg','Firefly_Gemini Flash_dame esta imagen en 1080x1920 250989.png'],
+    pdf: BASE + '/67,32m2/67m2.pdf',
+    tag:'Grande'
+  },
+  {
+    id:'m80', size:'80m²', name:'Modelo 4025 Americana',
+    desc:'El modelo 4025 de 80m² en estilo americano. 3 dormitorios, 2 baños, living-comedor generoso, cocina completa y lavadero. Ideal para familias en crecimiento.',
+    folder: BASE + '/80m2 Americana',
+    cover:'ChatGPT Image 7 may 2026, 02_28_52 p.m..png',
+    gallery:['ChatGPT Image 7 may 2026, 02_28_52 p.m..png','ChatGPT Image 7 may 2026, 02_30_26 p.m..png','WhatsApp Image 2026-05-07 at 3.38.48 PM.jpeg','WhatsApp Image 2026-05-07 at 3.38.48 PMmm.jpeg'],
+    pdf: BASE + '/80m2 Americana/Catalogo 80m2 modelo 4025.pdf',
+    tag:'Grande'
+  },
+  {
+    id:'m103', size:'103m²', name:'Modelo 103010',
+    desc:'El modelo 103010 de 103m² es nuestra propuesta familiar completa. 3 dormitorios amplios, 2 baños, living, comedor y cocina independiente. Espacioso y funcional.',
+    folder: BASE + '/103m2',
+    cover:'103m2 am.png',
+    gallery:['103m2 am.png','103m2 americ.png','plano 103m2.png'],
+    pdf: BASE + '/103m2/Catalogo 103m2 modelo 103010.pdf',
+    tag:'Grande'
+  },
+  {
+    id:'mdup30', size:'Dúplex 30m²', name:'Dúplex 30',
+    desc:'Dúplex moderno de 30m² en dos plantas. Diseño inteligente que maximiza el espacio en lotes reducidos. Construcción en Wood Framing con terminaciones de primera.',
+    folder: BASE + '/Duplex 30m2',
+    cover:'Duplex 30m2.png',
+    gallery:['ChatGPT Image 7 may 2026, 16_35_49.png','Duplex 30m2.png','duplex30m2.png','plano 30m2 duplex.jpeg'],
+    pdf: BASE + '/Duplex 30m2/Duplex 30m2.pdf',
+    tag:'Dúplex'
+  },
+  {
+    id:'mquincho', size:'Quincho 40m²', name:'Quincho Premium',
+    desc:'Quincho de 40m² con parrilla integrada, barra y espacio cubierto para reuniones. Construcción en Wood Framing con materiales de primera línea.',
+    folder: BASE + '/Quincho 40m2',
+    cover:'ChatGPT Image 7 may 2026, 04_16_56 p.m..png',
+    gallery:['ChatGPT Image 7 may 2026, 04_16_56 p.m..png','ChatGPT Image 7 may 2026, 16_19_36.png','ChatGPT Image 7 may 2026, 16_21_25.png','WhatsApp Image 2026-02-01 at 12.23.38 AM,m.jpeg','WhatsApp Image 2026-02-01 at 12.23.38 AM.jpeg','WhatsApp Image 2026-02-01 at 12.23.39 AMplano.jpeg'],
+    pdf: BASE + '/Quincho 40m2/quincho 40m2.pdf',
+    tag:'Quincho'
+  }
+];
+
+/* ─── GALLERY IMAGES ─── */
+const GALLERY_IMGS = [
+  'Galeria de proyectos/WhatsApp Image 2026-05-07 at 5.55.28 PM.jpeg',
+  'Galeria de proyectos/WhatsApp Image 2026-05-07 at 5.55.28 P.jpeg',
+  'Galeria de proyectos/WhatsApp Image 2026-05-07 at 5.55.28 PMmn.jpeg',
+  'Galeria de proyectos/WhatsApp Image 2026-05-07 at 5.55.28 PM...jpeg',
+  'Galeria de proyectos/WhatsApp Image 2026-05-07 at 5.55.28 PMh.jpeg',
+  'Galeria de proyectos/WhatsApp Image 2026-05-07 at 5.55.28 PMj.jpeg',
+  'Galeria de proyectos/WhatsApp Image 2026-05-07 at 5.55.28 PMk.jpeg',
+  'Galeria de proyectos/WhatsApp Image 2026-05-07 at 5.55.28 PMf.jpeg',
+  'Galeria de proyectos/WhatsApp Image 2026-05-07 at 5.55.28 as.jpeg',
+  'Galeria de proyectos/WhatsApp Image 2026-05-07 at 5.55.28 PMwe.jpeg',
+  'Galeria de proyectos/WhatsApp Image 2026-05-07 at 5.55.28 PMsas.jpeg',
+  'Galeria de proyectos/WhatsApp Image 2026-05-07 at 5.55.28 PMs.jpeg',
+  'Galeria de proyectos/WhatsApp Image 2026-05-07 at 5.55.28 PMwes.jpeg',
+  'Galeria de proyectos/WhatsApp Image 2026-05-07 at 5.55.28 PMw.jpeg',
+  'Galeria de proyectos/q.jpeg',
+  'Galeria de proyectos/WhatsApp Image 2026-05-07 at 5.55.28 PMrr.jpeg',
+  'Galeria de proyectos/WhatsApp Image 2026-05-07 at 5.55.28 PMt.jpeg',
+  'Galeria de proyectos/WhatsApp Image 2026-05-07 at 5.55.28 r.jpeg',
+  'Galeria de proyectos/WhatsApp Image 2026-05-07 at 5.55.28 PMqw.jpeg',
+  'Galeria de proyectos/WhatsApp Image 2026-05-07 at 5.55.28 PMg.jpeg',
+  'Galeria de proyectos/WhatsApp Image 2026-05-07 at 5.55.28 PMsdf.jpeg',
+  'Galeria de proyectos/WhatsApp Image 2026-05-07 at 5.55.28 PMyy.jpeg'
+];
+
+/* ─── INIT IMAGES ─── */
+(function initImages(){
+  const logo = enc(BASE + '/vision real logo.png');
+  document.getElementById('logo-img').src        = logo;
+  document.getElementById('footer-logo-img').src = logo;
+  document.getElementById('about-img').src       = enc(BASE + '/80m2 Americana/ChatGPT Image 7 may 2026, 02_30_26 p.m..png');
+})();
+
+/* ─── RENDER CATALOG ─── */
+(function renderCatalog(){
+  const grid = document.getElementById('catalog-grid');
+  MODELS.forEach((m, i) => {
+    const imgSrc = enc(m.folder + '/' + m.cover);
+    const delay  = (i % 4) + 1;
+    const card   = document.createElement('div');
+    card.className = 'model-card fade-up';
+    card.dataset.delay = delay;
+    card.innerHTML = `
+      <div class="model-img">
+        <img src="${imgSrc}" alt="${m.size} - ${m.name}" loading="lazy">
+        <span class="model-tag">${m.tag}</span>
+      </div>
+      <div class="model-body">
+        <div class="model-size">${m.size}</div>
+        <div class="model-name">${m.name}</div>
+        <div class="model-desc">${m.desc.substring(0,100)}…</div>
+        <div class="model-actions">
+          <button class="btn-detail" data-id="${m.id}">Ver detalles</button>
+          <a class="btn-pdf" href="${enc(m.pdf)}" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            PDF
+          </a>
+        </div>
+      </div>`;
+    grid.appendChild(card);
+  });
+  grid.querySelectorAll('.btn-detail').forEach(btn => {
+    btn.addEventListener('click', e => { e.stopPropagation(); openModal(btn.dataset.id); });
+  });
+  grid.querySelectorAll('.model-card').forEach(card => {
+    card.addEventListener('click', e => {
+      if(!e.target.closest('.btn-pdf')) card.querySelector('.btn-detail').click();
+    });
+  });
+})();
+
+/* ─── RENDER GALLERY ─── */
+(function renderGallery(){
+  const grid = document.getElementById('gallery-grid');
+  GALLERY_IMGS.forEach((imgPath, i) => {
+    const src  = enc(imgPath);
+    const item = document.createElement('div');
+    item.className = 'gallery-item fade-up';
+    item.dataset.delay = (i % 5) + 1;
+    item.innerHTML = `<img src="${src}" alt="Obra Visión Real" loading="lazy">`;
+    item.addEventListener('click', () => lightbox(src));
+    grid.appendChild(item);
+  });
+})();
+
+/* ─── SOCIAL LINKS ─── */
+(function setLinks(){
+  const wa = `https://wa.me/${WA_NUMBER}?text=${WA_MSG}`;
+  const ig = `https://instagram.com/${IG_USER}`;
+  const tt = `https://tiktok.com/@${TT_USER}`;
+  document.getElementById('wa-float').href   = wa;
+  document.getElementById('wa-contact').href = wa;
+  document.getElementById('wa-display').textContent = `+${WA_NUMBER}`;
+  document.getElementById('ig-contact').href = ig;
+  document.getElementById('ig-display').textContent = `@${IG_USER}`;
+  document.getElementById('tt-contact').href = tt;
+  document.getElementById('tt-display').textContent = `@${TT_USER}`;
+  document.getElementById('footer-wa').href = wa;
+  document.getElementById('footer-ig').href = ig;
+  document.getElementById('footer-tt').href = tt;
+  document.querySelectorAll('.nav-cta').forEach(el => el.href = wa);
+  document.getElementById('btn-ficha').href = enc(FALLBACK_PDF);
+})();
+
+/* ─── MODAL ─── */
+let currentModal = null, currentImg = 0;
+
+function openModal(id){
+  const m = MODELS.find(x => x.id === id);
+  if(!m) return;
+  currentModal = m;
+  currentImg   = 0;
+  document.getElementById('modal-title').textContent    = `${m.size} — ${m.name}`;
+  document.getElementById('modal-subtitle').textContent = m.name;
+  document.getElementById('modal-desc').textContent     = m.desc;
+  document.getElementById('modal-pdf').href             = enc(m.pdf);
+  document.getElementById('modal-pdf').download         = m.pdf.split('/').pop();
+  renderModalGallery();
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function renderModalGallery(){
+  const m    = currentModal;
+  const img  = document.getElementById('modal-img');
+  const dots = document.getElementById('gallery-dots');
+  img.src    = enc(m.folder + '/' + m.gallery[currentImg]);
+  img.alt    = `${m.size} imagen ${currentImg + 1}`;
+  dots.innerHTML = '';
+  m.gallery.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'gallery-dot' + (i === currentImg ? ' active' : '');
+    d.addEventListener('click', () => { currentImg = i; renderModalGallery(); });
+    dots.appendChild(d);
+  });
+  document.getElementById('gal-prev').style.display = m.gallery.length > 1 ? '' : 'none';
+  document.getElementById('gal-next').style.display = m.gallery.length > 1 ? '' : 'none';
+}
+
+function closeModal(){
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('modal-close').addEventListener('click', closeModal);
+document.getElementById('modal-overlay').addEventListener('click', e => {
+  if(e.target === document.getElementById('modal-overlay')) closeModal();
+});
+document.getElementById('gal-prev').addEventListener('click', () => {
+  currentImg = (currentImg - 1 + currentModal.gallery.length) % currentModal.gallery.length;
+  renderModalGallery();
+});
+document.getElementById('gal-next').addEventListener('click', () => {
+  currentImg = (currentImg + 1) % currentModal.gallery.length;
+  renderModalGallery();
+});
+document.addEventListener('keydown', e => {
+  if(!document.getElementById('modal-overlay').classList.contains('open')) return;
+  if(e.key === 'Escape')      closeModal();
+  if(e.key === 'ArrowLeft')  document.getElementById('gal-prev').click();
+  if(e.key === 'ArrowRight') document.getElementById('gal-next').click();
+});
+
+/* ─── LIGHTBOX ─── */
+function lightbox(src){
+  const ov = document.createElement('div');
+  ov.style.cssText = 'position:fixed;inset:0;z-index:3000;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;cursor:zoom-out';
+  const img = document.createElement('img');
+  img.src = src;
+  img.style.cssText = 'max-width:92vw;max-height:92vh;border-radius:8px;box-shadow:0 8px 48px rgba(0,0,0,.6)';
+  ov.appendChild(img);
+  ov.addEventListener('click', () => document.body.removeChild(ov));
+  document.body.appendChild(ov);
+}
+
+/* ─── NAVBAR ─── */
+const navbar    = document.getElementById('navbar');
+const hamburger = document.getElementById('hamburger');
+const navLinks  = document.getElementById('nav-links');
+
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+}, {passive: true});
+
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  navLinks.classList.toggle('open');
+});
+navLinks.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    navLinks.classList.remove('open');
+  });
+});
+
+/* ─── SCROLL ANIMATIONS ─── */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+}, {threshold: 0.12});
+
+document.querySelectorAll('.fade-up,.fade-left,.fade-right').forEach(el => observer.observe(el));
+
+/* ─── COUNTERS ─── */
+function animateCounter(el){
+  const target   = parseInt(el.dataset.target);
+  const duration = 1800;
+  const step     = Math.ceil(target / (duration / 16));
+  let current    = 0;
+  const id = setInterval(() => {
+    current = Math.min(current + step, target);
+    el.textContent = current;
+    if(current >= target) clearInterval(id);
+  }, 16);
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.counter').forEach(animateCounter);
+      counterObserver.unobserve(e.target);
+    }
+  });
+}, {threshold: 0.3});
+counterObserver.observe(document.getElementById('stats'));
+
+/* ─── PARTICLES ─── */
+(function initParticles(){
+  const canvas = document.getElementById('particles-canvas');
+  const ctx = canvas.getContext('2d');
+  const COUNT = 60;
+  const RGB = '201,168,76';
+  function resize(){ canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
+  window.addEventListener('resize', resize, {passive:true});
+  resize();
+  const pts = Array.from({length:COUNT}, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: 1 + Math.random() * 2,
+    vy: 0.3 + Math.random() * 0.7,
+    vx: (Math.random() - 0.5) * 0.3,
+    o: 0.3 + Math.random() * 0.5
+  }));
+  function draw(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    pts.forEach(p => {
+      ctx.save();
+      ctx.shadowBlur = 10;
+      ctx.shadowColor = `rgba(${RGB},${p.o})`;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${RGB},${p.o})`;
+      ctx.fill();
+      ctx.restore();
+      p.y -= p.vy;
+      p.x += p.vx;
+      if(p.y < -10){ p.y = canvas.height + 10; p.x = Math.random() * canvas.width; }
+      if(p.x < -10 || p.x > canvas.width + 10) p.x = Math.random() * canvas.width;
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ─── PARALLAX ─── */
+window.addEventListener('scroll', () => {
+  const scrolled = window.pageYOffset;
+  const bg = document.getElementById('hero-bg');
+  if(bg && scrolled < window.innerHeight * 1.5){
+    bg.style.transform = `translateY(${scrolled * 0.35}px)`;
+  }
+}, {passive: true});
+</script>
+</body>
+</html>
