@@ -260,6 +260,69 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.2}
 .gallery-item:hover img{transform:scale(1.08)}
 .gallery-item:hover::after{background:rgba(27,31,107,.3)}
 
+/* ── Cotiza ── */
+#cotiza{padding:6rem 6%;background:#fff}
+.cotiza-header{text-align:center;margin-bottom:3rem}
+.cotiza-header .section-sub{margin:0 auto}
+.cotiza-form-wrap{
+  max-width:680px;margin:0 auto;
+  background:#fff;border-radius:var(--radius);
+  box-shadow:var(--shadow-hover);
+  padding:3rem 2.5rem;
+  border:1px solid rgba(27,31,107,.08);
+}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.form-group{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.25rem}
+.form-group label{font-size:.78rem;font-weight:600;color:var(--navy);letter-spacing:.06em;text-transform:uppercase}
+.form-group input,.form-group select,.form-group textarea{
+  padding:.75rem 1rem;border:2px solid #e5e7eb;border-radius:10px;
+  font-family:'DM Sans',sans-serif;font-size:.95rem;color:var(--text);
+  background:#fafafa;transition:border-color .25s,box-shadow .25s;
+  outline:none;appearance:auto;
+}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+  border-color:var(--navy);box-shadow:0 0 0 3px rgba(27,31,107,.1);background:#fff;
+}
+.form-group input.error,.form-group select.error,.form-group textarea.error{border-color:#e53e3e}
+.form-group textarea{resize:vertical;min-height:100px}
+.radio-group{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.25rem}
+.radio-opt{
+  display:flex;align-items:center;gap:.45rem;cursor:pointer;
+  padding:.5rem 1rem;border-radius:50px;border:2px solid #e5e7eb;
+  font-size:.88rem;font-weight:500;color:var(--text);
+  transition:border-color .25s,background .25s,color .25s;user-select:none;
+}
+.radio-opt input[type=radio]{display:none}
+.radio-opt.selected{border-color:var(--navy);background:var(--navy);color:#fff}
+.radio-group.error-border .radio-opt{border-color:#e53e3e}
+.btn-cotiza{
+  width:100%;padding:1rem 2rem;
+  background:var(--gold);color:var(--navy);
+  font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;
+  border-radius:50px;border:none;cursor:pointer;
+  transition:background var(--transition),transform var(--transition),box-shadow var(--transition);
+  box-shadow:0 4px 18px rgba(201,168,76,.35);
+  margin-top:.5rem;display:flex;align-items:center;justify-content:center;gap:.5rem;
+}
+.btn-cotiza:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,168,76,.5)}
+.btn-cotiza svg{width:20px;height:20px}
+#cotiza-success{
+  display:none;text-align:center;padding:2.5rem 1.5rem;
+}
+#cotiza-success.show{display:block}
+#cotiza-success .success-icon{
+  width:64px;height:64px;margin:0 auto 1.25rem;
+  background:rgba(201,168,76,.12);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+}
+#cotiza-success .success-icon svg{width:32px;height:32px;color:var(--gold)}
+#cotiza-success h3{font-size:1.45rem;color:var(--navy);margin-bottom:.75rem}
+#cotiza-success p{color:var(--text-light);font-size:.97rem;line-height:1.7}
+@media(max-width:600px){
+  .form-row{grid-template-columns:1fr}
+  .cotiza-form-wrap{padding:2rem 1.25rem}
+}
+
 /* ── Contacto ── */
 #contacto{padding:6rem 6%;background:var(--navy)}
 .contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
@@ -430,6 +493,7 @@ footer{background:#0b0e38;padding:3rem 6% 2rem;border-top:1px solid rgba(255,255
     <a href="#servicios">Servicios</a>
     <a href="#catalogo">Catálogo</a>
     <a href="#galeria">Galería</a>
+    <a href="#cotiza">Cotizá</a>
     <a href="#contacto">Contacto</a>
     <a href="#contacto" class="nav-cta">
       <svg viewBox="0 0 24 24" fill="currentColor" style="display:inline;vertical-align:middle;margin-right:4px;width:14px;height:14px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2c-5.514 0-9.999 4.486-9.999 10 0 1.762.464 3.413 1.277 4.85L2 22l5.233-1.261A9.953 9.953 0 0 0 12 22c5.514 0 10-4.486 10-10S17.513 2 11.999 2z"/></svg>
@@ -583,6 +647,75 @@ footer{background:#0b0e38;padding:3rem 6% 2rem;border-top:1px solid rgba(255,255
     <p class="section-sub fade-up" data-delay="2" style="margin:0 auto">Conocé algunos de nuestros modelos y proyectos en todo el país.</p>
   </div>
   <div class="gallery-grid" id="gallery-grid"></div>
+</section>
+
+<!-- ═══ COTIZÁ TU VIVIENDA ═══ -->
+<section id="cotiza">
+  <div class="cotiza-header">
+    <p class="section-label fade-up">Presupuesto sin compromiso</p>
+    <h2 class="section-title fade-up" data-delay="1">Cotizá tu Vivienda</h2>
+    <p class="section-sub fade-up" data-delay="2">Completá el formulario y te enviamos una cotización personalizada por WhatsApp en menos de 24 hs.</p>
+  </div>
+  <div class="cotiza-form-wrap fade-up" data-delay="2">
+    <form id="cotiza-form" novalidate>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="c-nombre">Nombre completo *</label>
+          <input type="text" id="c-nombre" placeholder="Ej: María González" autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label for="c-wapp">WhatsApp *</label>
+          <input type="tel" id="c-wapp" placeholder="Ej: +54 9 11 1234-5678" autocomplete="tel">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="c-dormitorios">Dormitorios *</label>
+          <select id="c-dormitorios">
+            <option value="">Seleccioná...</option>
+            <option value="1 dormitorio">1 dormitorio</option>
+            <option value="2 dormitorios">2 dormitorios</option>
+            <option value="3 dormitorios">3 dormitorios</option>
+            <option value="4 o más dormitorios">4 o más</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="c-zona">Zona del terreno *</label>
+          <input type="text" id="c-zona" placeholder="Ej: GBA Sur, Córdoba...">
+        </div>
+      </div>
+      <div class="form-group" id="terreno-group">
+        <label>¿Tenés terreno propio? *</label>
+        <div class="radio-group" id="rg-terreno">
+          <label class="radio-opt"><input type="radio" name="c-terreno" value="Sí, tengo terreno propio"> Sí</label>
+          <label class="radio-opt"><input type="radio" name="c-terreno" value="Todavía no tengo terreno"> Todavía no</label>
+        </div>
+      </div>
+      <div class="form-group" id="pago-group">
+        <label>Forma de pago *</label>
+        <div class="radio-group" id="rg-pago">
+          <label class="radio-opt"><input type="radio" name="c-pago" value="Contado"> Contado</label>
+          <label class="radio-opt"><input type="radio" name="c-pago" value="Financiado"> Financiado</label>
+          <label class="radio-opt"><input type="radio" name="c-pago" value="Quiero consultar opciones"> Quiero consultar opciones</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="c-comentario">Comentario <span style="font-weight:400;text-transform:none;letter-spacing:0">(opcional)</span></label>
+        <textarea id="c-comentario" placeholder="Contanos más sobre tu proyecto, medidas del terreno, preferencias de diseño..."></textarea>
+      </div>
+      <button type="submit" class="btn-cotiza">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2c-5.514 0-9.999 4.486-9.999 10 0 1.762.464 3.413 1.277 4.85L2 22l5.233-1.261A9.953 9.953 0 0 0 12 22c5.514 0 10-4.486 10-10S17.513 2 11.999 2z"/></svg>
+        Solicitar cotización gratis
+      </button>
+    </form>
+    <div id="cotiza-success">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h3>¡Solicitud enviada!</h3>
+      <p>Se abrió WhatsApp con tu consulta. Te responderemos a la brevedad.<br>¡Gracias por contactarnos!</p>
+    </div>
+  </div>
 </section>
 
 <!-- ═══ CONTACTO ═══ -->
@@ -1124,6 +1257,69 @@ counterObserver.observe(document.getElementById('stats'));
     requestAnimationFrame(draw);
   }
   draw();
+})();
+
+/* ─── COTIZA FORM ─── */
+(function initCotizaForm(){
+  const form    = document.getElementById('cotiza-form');
+  const success = document.getElementById('cotiza-success');
+
+  /* Radio pill toggle */
+  document.querySelectorAll('.radio-group').forEach(group => {
+    group.querySelectorAll('.radio-opt').forEach(opt => {
+      opt.addEventListener('click', () => {
+        group.querySelectorAll('.radio-opt').forEach(o => o.classList.remove('selected'));
+        opt.classList.add('selected');
+        group.classList.remove('error-border');
+        opt.querySelector('input').checked = true;
+      });
+    });
+  });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    let ok = true;
+
+    const nombre = document.getElementById('c-nombre');
+    const wapp   = document.getElementById('c-wapp');
+    const dorms  = document.getElementById('c-dormitorios');
+    const zona   = document.getElementById('c-zona');
+    const terr   = form.querySelector('input[name="c-terreno"]:checked');
+    const pago   = form.querySelector('input[name="c-pago"]:checked');
+    const coment = document.getElementById('c-comentario');
+
+    [nombre, wapp, dorms, zona].forEach(el => el.classList.remove('error'));
+    document.getElementById('rg-terreno').classList.remove('error-border');
+    document.getElementById('rg-pago').classList.remove('error-border');
+
+    if(!nombre.value.trim()){ nombre.classList.add('error'); ok = false; }
+    if(!wapp.value.trim()){ wapp.classList.add('error'); ok = false; }
+    if(!dorms.value){ dorms.classList.add('error'); ok = false; }
+    if(!zona.value.trim()){ zona.classList.add('error'); ok = false; }
+    if(!terr){ document.getElementById('rg-terreno').classList.add('error-border'); ok = false; }
+    if(!pago){ document.getElementById('rg-pago').classList.add('error-border'); ok = false; }
+
+    if(!ok){
+      form.querySelector('.error, .error-border') &&
+        form.querySelector('.error, .error-border').scrollIntoView({behavior:'smooth', block:'center'});
+      return;
+    }
+
+    const msg =
+      `🏠 *Solicitud de Cotización — Visión Real Viviendas*\n\n` +
+      `*Nombre:* ${nombre.value.trim()}\n` +
+      `*WhatsApp:* ${wapp.value.trim()}\n` +
+      `*Dormitorios:* ${dorms.value}\n` +
+      `*Zona del terreno:* ${zona.value.trim()}\n` +
+      `*¿Tenés terreno propio?* ${terr.value}\n` +
+      `*Forma de pago:* ${pago.value}\n` +
+      `*Comentarios:* ${coment.value.trim() || 'Sin comentarios adicionales'}`;
+
+    window.open(`https://wa.me/5491160429235?text=${encodeURIComponent(msg)}`, '_blank');
+
+    form.style.display = 'none';
+    success.classList.add('show');
+  });
 })();
 
 /* ─── PARALLAX ─── */
