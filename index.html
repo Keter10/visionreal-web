@@ -394,11 +394,11 @@ footer{background:#0b0e38;padding:3rem 6% 2rem;border-top:1px solid rgba(255,255
     position:fixed;top:70px;left:0;right:0;
     background:rgba(27,31,107,.97);
     flex-direction:column;gap:0;
-    padding:1rem 0 1.5rem;
+    padding:0;
     max-height:0;overflow:hidden;
-    transition:max-height .4s;
+    transition:max-height .4s,padding .4s;
   }
-  .nav-links.open{max-height:400px}
+  .nav-links.open{max-height:400px;padding:1rem 0 1.5rem}
   .nav-links a{padding:.9rem 6%;width:100%;border-bottom:1px solid rgba(255,255,255,.06)}
   .nav-links .nav-cta{margin:.75rem 6% 0;display:block;text-align:center;border-radius:8px}
   .hamburger{display:flex}
